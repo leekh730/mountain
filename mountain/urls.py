@@ -18,5 +18,5 @@ from django.urls import path
 from mainhome import views as mh
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', mh.test, name='testpg'),
+    path('test/', mh.test, name='testpg'), # django 제대로 실행 여부 확인용
 ]
