@@ -7,7 +7,6 @@ from folium.plugins import MarkerCluster
 import folium
 import pandas as pd
 # Paginator
-from mainhome.mongopaginator import MongoPaginator
 from django.core.paginator import Paginator
 
 def test(request):
@@ -75,3 +74,18 @@ def f_maps(request):
         m.add_child(minimap)
     m = m._repr_html_
     return render(request, 'maps.html')
+
+def detail(request, latlon):
+    # http://127.0.0.1:8000/detail/?lat=36.7066013257&lon=126.60836041
+    # request.GET['lat'], request.GET['lon']
+    with MongoClient('mongodb://127.0.0.1:27017/') as client:
+        client = MongoClient('mongodb://127.0.0.1:27017')
+        db = client.mountain # mountain 데이터베이스에 접속
+        df = pd.DataFrame(db.sampleCollection.find()) # dataFrame타입으로 전환 후 sampleCollection이라는 collection에 접속
+        #print(df.dtypes) # dataframe columns type check
+        df['address_1']=df['address_1'].astype(float) # address_1 column type이 기존 object여서 float으로 변경
+        df['address_2']=df['address_2'].astype(float) # address_2 column type이 기존 object여서 float으로 변경
+        m = folium.Map(location=[latlon], zoom_start=15) # map을 열었을때의 시작 화면
+    m = m._repr_html_
+
+    return render(request, 'detail.html')

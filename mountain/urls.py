@@ -22,4 +22,7 @@ urlpatterns = [
     path('maps/', mh.f_maps, name='mapspg'), # folium maps와 연결
     path('', mh.home, name='home'),
     path('mountainlist/', mh.mountainlist, name='mountainlist'),
+    #path('detail/<str:lat><str:lon>', mh.detail, name='detail'),
+    path('detail/<str:latlon>', mh.detail, name='detail'),
+
 ]
