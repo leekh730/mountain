@@ -4,7 +4,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<style>
+    /* Define the default color for all the table rows */
+    .table tr{
+        background: #d4e9f6;
+    }
+    /* Define the hover highlight color for the table row */
+    .table tr:hover {
+        background-color: #ffff6f;
+    }
+</style>
+  
 <div class="w3-row-padding w3-padding-64 w3-container">
     <div class="w3-content">
         <div class="w3-panel w3-animate-opacity">
@@ -14,45 +24,71 @@
         </div>
     
         <table class="table table-striped">
-            <tr>
-                <!-- <th class="w3-container w3-green">사진</th>  -->
-                <th class="w3-container w3-blue">산이름</th> 
-                <th class="w3-container w3-red">좌표</th> 
-                <th class="w3-container w3-yellow">날씨</th>
-                <th class="w3-container w3-green">강수량/습도/풍속</th> 
-                <th class="w3-container w3-green">내용</th> 
-                <th class="w3-container w3-green">Date</th> 
-            </tr>
-            {% for row in page_obj.0 %}
-            <tr> 
-                <!-- <td>{{row.img_data}}</td>  -->
-                <td>{{row.class_}}</td> 
-                <td>{{row.address_}}</td> 
-                <td>{{row.weather_data}}</td> 
-                <td>
-                    {{row.rain_data}}
-                    {{row.Hum_data}}
-                    {{row.wind_data}}
-                </td> 
-                <td>{{row.datas_mnt}}</td> 
-                <td>{{row.today_timedata}}</td>  
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th class="w3-container w3-blue" >산이름</th> 
+                    <th class="w3-container w3-red" >지역</th> 
+                    <th class="w3-container w3-yellow" >날씨</th>
+                    <th class="w3-container w3-green" >강수량/습도/풍속</th> 
+                    <th class="w3-container w3-pink" >좌표</th> 
+                    <th class="w3-container w3-green" >업데이트</th> 
+                </tr>
+            </thead>
+            <tbody id='mtlist'>
+                {% for row in page_obj.0 %}
+                    <tr>
+                    <td >{{row.class_}}</td> 
+                    <td>{{row.C_ad}}</td> 
+                    <td>{{row.weather_data}}</td> 
+                    <td>
+                        {{row.rain_data}}
+                        {{row.Hum_data}}
+                        {{row.wind_data}}
+                    </td> 
+                    <td>{{row.address_1}},&nbsp;{{row.address_2}}</td>
+                    <td>{{row.today_timedata}}</td>  
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+        <!-- 페이지네이터 임시 -->
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
             {% if page_obj.0.has_previous %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.previous_page_number }}">Previous</a></li>
             {% endif %}
             <li class="page-item active"><a class="page-link" href="#">Page {{ page_obj.0.number }} of
                     {{ page_obj.0.paginator.num_pages }}</a></li>
             {% if page_obj.0.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.paginator.num_pages }}">last &raquo;</a>
-            </li>
-            {% endif %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.next_page_number }}">Next</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.paginator.num_pages }}">Last &raquo;</a>
         </ul>
     </div>
 </div>
 
+<script>
+    /*
+    var table = document.getElementById("mtlist");
+
+    table.onclick = function(){clickevent()};
+
+    function clickevent(){
+        var tr = $(this);
+        var td = tr.children();
+        td.each(function(){
+            onclick=location.href='../maps/'
+        });
+    };
+*/
+
+    var table = document.getElementById("mtlist")
+    table.onclick = function(){
+        myFunction();
+    };
+
+    function myFunction(){
+        document.getElementById("mtlist").onclick=location.href='../maps'
+        };
+</script>
 {% endblock %}

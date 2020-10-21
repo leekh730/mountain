@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from pymongo import MongoClient
 # For folium Modules
 from folium import plugins
+from folium.plugins import MarkerCluster
 import folium
 import pandas as pd
 # Paginator
@@ -20,8 +21,8 @@ def mountainlist(request):
     with MongoClient('mongodb://127.0.0.1:27017/') as client:
         mountain = client.mountain
         result = list(mountain.sampleCollection.find({}))
-        for info in result:
-            print(type(info),info)
+        # for info in result:
+        #     print(type(info),info)
     paginator = Paginator(result,10) # show 10 contents per page
     page_number = request.GET.get('page',1)
     data['page_obj'] = paginator.get_page(page_number)
@@ -37,6 +38,7 @@ def f_maps(request):
         df['address_2']=df['address_2'].astype(float) # address_2 column type이 기존 object여서 float으로 변경
         m = folium.Map(location=[36.70,127.90], zoom_start=8) # map을 열었을때의 시작 화면
         # iterrrows()함수보다 apply()함수(+lamda)가 data처리가 더 빠름
+        marker_cluster = MarkerCluster().add_to(m)
         for index, row in df.iterrows(): # pandas for문, iterrows는 dataframe의 행을 나타냄
             tooltip = 'Click!'
             html = f"""
@@ -67,7 +69,7 @@ def f_maps(request):
             """
             html = folium.Html(html,script=True, width=300, height=150) # popup을 html로 열기
             popup = folium.Popup(html=html, max_width='100%')
-            folium.Marker([row['address_1'], row['address_2']], popup=popup,  icon=folium.Icon(icon='star'), tooltip=tooltip).add_to(m) # dataframe에 각 열의 위도,경도 값 불러오기
+            folium.Marker([row['address_1'], row['address_2']], popup=popup,  icon=folium.Icon(icon='star'), tooltip=tooltip).add_to(marker_cluster) # dataframe에 각 열의 위도,경도 값 불러오기
 
         minimap = plugins.MiniMap() # minimap 추가
         m.add_child(minimap)
