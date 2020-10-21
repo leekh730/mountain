@@ -19,10 +19,10 @@ from mainhome import views as mh
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', mh.test, name='testpg'), # django 제대로 실행 여부 확인용
-    path('maps/', mh.f_maps, name='mapspg'), # folium maps와 연결
+    path('maps/', mh.f_maps, name='maps'), # folium maps와 연결
     path('', mh.home, name='home'),
     path('mountainlist/', mh.mountainlist, name='mountainlist'),
     #path('detail/<str:lat><str:lon>', mh.detail, name='detail'),
-    path('detail/<str:latlon>', mh.detail, name='detail'),
+    path('detail/', mh.detail, name='detail'),
 
 ]

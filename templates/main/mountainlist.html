@@ -18,6 +18,7 @@
 <div class="w3-row-padding w3-padding-64 w3-container">
     <div class="w3-content">
         <div class="w3-panel w3-animate-opacity">
+            <div class="w3-tag w3-jumbo">명</div>
             <div class="w3-tag w3-jumbo">산</div>
             <div class="w3-tag w3-jumbo">정</div>
             <div class="w3-tag w3-jumbo">보</div>
@@ -37,7 +38,7 @@
             <tbody>
                 {% for row in page_obj.0 %}
                     <tr>
-                    <td >{{row.class_}}</td> 
+                    <td>{{row.class_}}</td> 
                     <td>{{row.C_ad}}</td> 
                     <td>{{row.weather_data}}</td> 
                     <td>
@@ -103,11 +104,13 @@ $("#mtlist tr").click(function(){
     var td = tr.children(); //tr의 자식 노드는 td
     var lat = td.eq(4).text().split(',')[0]
     var lon = td.eq(4).text().split(',')[1]
-    var latlon = lat+lon
+    var lat1 = parseFloat(lat)
+    var lon1 = parseFloat(lon)
+    var latlon = lat1.lon1
     //var latlon = td.eq(4).text()
-    console.log('위도 : '+lat ,'경도 :'+lon)
+    console.log(lat1,lon1)
     console.log(latlon)
-    location.href='../detail/'+latlon
+    location.href='../detail/'
     // mountainlist.html, detail.html, urls.py, views.py 변경해야됨, 
 
     //console.log('클릭한 row의 데이터 : ' + tr.text()); //tr.text()는 클릭된 row에 있는 모든 값을 가져옴
