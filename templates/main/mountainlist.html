@@ -102,15 +102,18 @@ $("#mtlist tr").click(function(){
     var tdArr = new Array(); // 배열 선언
     var tr = $(this); // 현재 클릭된 Row(<tr>)
     var td = tr.children(); //tr의 자식 노드는 td
+    var name = td.eq(0).text()
+
     var lat = td.eq(4).text().split(',')[0]
     var lon = td.eq(4).text().split(',')[1]
     var lat1 = parseFloat(lat)
     var lon1 = parseFloat(lon)
     var latlon = lat1.lon1
     //var latlon = td.eq(4).text()
+    console.log(name)
     console.log(lat1,lon1)
     console.log(latlon)
-    location.href='../detail/'
+    location.href='../detail/'+name
     // mountainlist.html, detail.html, urls.py, views.py 변경해야됨, 
 
     //console.log('클릭한 row의 데이터 : ' + tr.text()); //tr.text()는 클릭된 row에 있는 모든 값을 가져옴

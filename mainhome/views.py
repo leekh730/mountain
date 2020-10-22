@@ -8,6 +8,7 @@ import folium
 import pandas as pd
 # Paginator
 from django.core.paginator import Paginator
+import json
 
 def test(request):
     return HttpResponse("Start Project!") # django 제대로 실행 여부 확인용
@@ -75,17 +76,24 @@ def f_maps(request):
     m = m._repr_html_
     return render(request, 'maps.html')
 
-def detail(request):
-    # http://127.0.0.1:8000/detail/?lat=36.7066013257&lon=126.60836041
-    # request.GET['lat'], request.GET['lon']
-    with MongoClient('mongodb://127.0.0.1:27017/') as client:
-        client = MongoClient('mongodb://127.0.0.1:27017')
-        db = client.mountain # mountain 데이터베이스에 접속
-        df = pd.DataFrame(db.sampleCollection.find()) # dataFrame타입으로 전환 후 sampleCollection이라는 collection에 접속
-        #print(df.dtypes) # dataframe columns type check
-        df['address_1']=df['address_1'].astype(float) # address_1 column type이 기존 object여서 float으로 변경
-        df['address_2']=df['address_2'].astype(float) # address_2 column type이 기존 object여서 float으로 변경
-        m = folium.Map(location=[37.87137778,127.9564694], zoom_start=8) # map을 열었을때의 시작 화면
-    m = m._repr_html_
+# def detail(request):
+#     # http://127.0.0.1:8000/detail/?lat=36.7066013257&lon=126.60836041
+#     # request.GET['lat'], request.GET['lon']
+#     with MongoClient('mongodb://127.0.0.1:27017/') as client:
+#         client = MongoClient('mongodb://127.0.0.1:27017')
+#         db = client.mountain # mountain 데이터베이스에 접속
+#         df = pd.DataFrame(db.sampleCollection.find()) # dataFrame타입으로 전환 후 sampleCollection이라는 collection에 접속
+#         #print(df.dtypes) # dataframe columns type check
+#         df['address_1']=df['address_1'].astype(float) # address_1 column type이 기존 object여서 float으로 변경
+#         df['address_2']=df['address_2'].astype(float) # address_2 column type이 기존 object여서 float으로 변경
+#         m = folium.Map(location=[37.87137778,127.9564694], zoom_start=8) # map을 열었을때의 시작 화면
+#     m = m._repr_html_
+#     return render(request, 'detail.html')
 
-    return render(request, 'detail.html')
+def detail(request, class_):
+    d_data = {}
+    with MongoClient('mongodb://127.0.0.1:27017/') as client:
+
+        d_list = list(client.mountain.sampleCollection.find({'class_':class_}))
+    d_data['data'] = d_list
+    return render(request, 'detail.html', context=d_data)

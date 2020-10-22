@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from mainhome import views as mh
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,6 @@ urlpatterns = [
     path('', mh.home, name='home'),
     path('mountainlist/', mh.mountainlist, name='mountainlist'),
     #path('detail/<str:lat><str:lon>', mh.detail, name='detail'),
-    path('detail/', mh.detail, name='detail'),
+    path('detail/<str:class_>', mh.detail, name='detail'),
 
 ]
