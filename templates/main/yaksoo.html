@@ -36,6 +36,18 @@
                 </tr>
             </thead>
             <tbody>
+                {% for row in page_obj.0 %}
+                    <tr>
+                    <td>{{row.class_}}</td> 
+                    <td>{{row.C_ad}}</td> 
+                    <td>{{row.Address_1}},{{row.Address_2}}</td> 
+                    <td>
+                        {{row.research}}
+                    </td> 
+                    <td>{{row.research_date}}</td>
+                    <td>{{row.C_ad1}}</td>  
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <!-- 페이지네이터 임시 -->

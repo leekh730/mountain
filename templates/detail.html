@@ -43,12 +43,12 @@
         <table class="table table-striped">
             <tbody> 
                 {% for row in data %}
-                <tr><th class="w3-container w3-blue" style="text-align:center">산이름</th> </tr>
+                <tr><th class="w3-container w3-blue" style="text-align:center">산 이름</th> </tr>
                 <tr style="text-align:center"><td>{{row.class_}}</td></tr>
                 <p></p>
                 <tr><th class="w3-container w3-red" style="text-align:center">이미지</th> </tr>
                 <tr style="text-align:center"><td><img src='{{row.img_data}}' width=500 height=300></td></tr>
-                <tr><th class="w3-container w3-yellow" style="text-align:left">내용</th> </tr>
+                <tr><th class="w3-container w3-yellow" style="text-align:center">내 용</th> </tr>
                 <tr style="text-align:left"><td>{{row.datas_mnt}}</td></tr>
                 {% endfor %}
             </tbody> 
