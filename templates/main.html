@@ -21,6 +21,7 @@
   <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Team</a>
   <a href="{% url 'mountainlist' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Mountain</a>
   <a href="{% url 'maps' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Map</a>
+  <a href="{% url 'yaksoo' %}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Yaksoo</a>
  </div>
 
   <!-- Navbar on small screens -->
@@ -28,6 +29,7 @@
     <a href="#team" class="w3-bar-item w3-button">Team</a>
     <a href="{% url 'mountainlist' %}" class="w3-bar-item w3-button">Mountain</a>
     <a href="{% url 'maps' %}" class="w3-bar-item w3-button">Map</a>
+    <a href="{% url 'yaksoo' %}" class="w3-bar-item w3-button">Yaksoo</a>
   </div>
 </div>
 
@@ -40,12 +42,13 @@
 </div>
 
 <!-- 100대명산 리스트 -->
-<div class="w3-container w3-padding-64 w3-center" id="{% url 'mountainlist' %}">
+<div class="w3-container w3-padding-64 w3-center">
     <h7>
         {% block content %}
         {% endblock %}
     </h7>
 </div>
+
 
 
 <!-- Footer -->

@@ -23,5 +23,5 @@ urlpatterns = [
     path('', mh.home, name='home'),
     path('mountainlist/', mh.mountainlist, name='mountainlist'),
     path('detail/<str:class_>', mh.detail, name='detail'),
-
+    path('yaksoo/', mh.yaksoo, name='yaksoo'),
 ]

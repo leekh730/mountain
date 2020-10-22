@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    /* Define the default color for all the table rows */
+    .table tr{
+        background: #d4e9f6;
+    }
+    /* Define the hover highlight color for the table row */
+    .table tr:hover {
+        background-color: #ffff6f;
+    }
+</style>
+  
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        <div class="w3-panel w3-animate-opacity">
+            <div class="w3-tag w3-jumbo">약</div>
+            <div class="w3-tag w3-jumbo">수</div>
+            <div class="w3-tag w3-jumbo">터</div>
+        </div>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="w3-container w3-blue" >이름</th> 
+                    <th class="w3-container w3-green" >주소</th> 
+                    <th class="w3-container w3-red" >좌표</th> 
+                    <th class="w3-container w3-yellow" >수질검사결과</th>
+                    <th class="w3-container w3-green" >수질검사일자</th> 
+                    <th class="w3-container w3-pink" >관리기관명</th> 
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!-- 페이지네이터 임시 -->
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            {% if page_obj.0.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            <li class="page-item active"><a class="page-link" href="#">Page {{ page_obj.0.number }} of
+                    {{ page_obj.0.paginator.num_pages }}</a></li>
+            {% if page_obj.0.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.next_page_number }}">Next</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.0.paginator.num_pages }}">Last &raquo;</a>
+        </ul>
+    </div>
+</div>
+{% endblock %}

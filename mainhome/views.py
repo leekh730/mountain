@@ -82,3 +82,6 @@ def detail(request, class_):
         d_list = list(client.mountain.sampleCollection.find({'class_':class_}))
     d_data['data'] = d_list
     return render(request, 'detail.html', context=d_data)
+
+def yaksoo(request):
+    return render(request, 'main/yaksoo.html')

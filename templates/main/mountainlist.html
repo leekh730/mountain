@@ -69,61 +69,32 @@
 </div>
 
 <script>
-    /*
-    var table = document.getElementById("mtlist");
-
-    table.onclick = function(){clickevent()};
-
-    function clickevent(){
-        var tr = $(this);
-        var td = tr.children();
-        td.each(function(){
-            onclick=location.href='../maps/'
-        });
-    };
-*/
-/*
-    var table = document.getElementById("mtlist")
-    table.onclick = function(){
-        myFunction();
-    };
-    */
-/*
-    function myFunction(){
-        document.getElementById("mtlist").onclick=location.href='../maps'
-        };
-
-    function myFunction(){
-    document.getElementById("mtlist").onclick=location.href='../detail'
-    };
-    */
 $("#mtlist tr").click(function(){
     var str="" // 문자열 저장
     var tdArr = new Array(); // 배열 선언
     var tr = $(this); // 현재 클릭된 Row(<tr>)
+    //console.log('클릭한 row의 데이터 : ' + tr.text()); //tr.text()는 클릭된 row에 있는 모든 값을 가져옴
+    
     var td = tr.children(); //tr의 자식 노드는 td
     var name = td.eq(0).text()
-
     var lat = td.eq(4).text().split(',')[0]
     var lon = td.eq(4).text().split(',')[1]
+    //console.log('좌표 :' + td.eq(4).text().split(',')[0]); //eq()는 인덱스로 해당 요소 찾는 것, td.eq(4)는 열(td)의 4번째 값을 가리킴
+    
     var lat1 = parseFloat(lat)
     var lon1 = parseFloat(lon)
-    var latlon = lat1.lon1
-    //var latlon = td.eq(4).text()
+    var latlon = [lat1,lon1]
     console.log(name)
     console.log(lat1,lon1)
-    console.log(latlon)
+    
     location.href='../detail/'+name
-    // mountainlist.html, detail.html, urls.py, views.py 변경해야됨, 
 
-    //console.log('클릭한 row의 데이터 : ' + tr.text()); //tr.text()는 클릭된 row에 있는 모든 값을 가져옴
     
     // 반복문을 이용해서 배열에 값을 담아 사용할 수 있음.
     td.each(function(i){
         tdArr.push(td.eq(i).text());
     });
 
-    //console.log('좌표 :' + td.eq(4).text().split(',')[0]); //eq()는 인덱스로 해당 요소 찾는 것, td.eq(4)는 열(td)의 4번째 값을 가리킴
 })
 </script>
 {% endblock %}
