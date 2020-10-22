@@ -118,6 +118,13 @@ def detail(request, class_):
     d_data['data'] = d_list
     return render(request, 'detail.html', context=d_data)
 
+def detail2(request, class_):
+    d_data = {}
+    with MongoClient('mongodb://127.0.0.1:27017/') as client:
+        d_list = list(client.mountain.yaksu.find({'class_':class_}))
+    d_data['data'] = d_list
+    return render(request, 'detail2.html', context=d_data)
+    
 def yaksoo(request):
     y_data = request.GET.copy()
     with MongoClient('mongodb://127.0.0.1:27017/') as client:
