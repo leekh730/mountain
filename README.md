@@ -31,3 +31,6 @@ web scrapping, DB 저장, Web framework 학습 목적 프로젝트
 <br>
 넣어준 데이터 값<br> 
 <img src="./datas/2.png" width="800"><br>
+
+
+PPT 발표 및 설명 => 코드노오조(주).pptx
